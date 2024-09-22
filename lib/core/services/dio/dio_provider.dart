@@ -5,11 +5,7 @@ import '../../constants/api_constants.dart';
 class DioProvider {
   static late Dio dio;
   static init() {
-    dio = Dio(
-      BaseOptions(
-        baseUrl: ApiConstants.baseUrl
-      )
-    );
+    dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
   }
 
   static Future<Response> post(
