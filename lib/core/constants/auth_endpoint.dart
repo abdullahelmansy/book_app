@@ -5,4 +5,5 @@ class ApiEndpoint {
   static String logout = '/logout';
   //home
   static String bestSeller = '/products-bestseller';
+  static String getSlider = '/sliders';
 }

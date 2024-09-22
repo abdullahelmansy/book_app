@@ -19,7 +19,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc()..add(GetBestSellerEvent()),
+      create: (context) => HomeBloc()
+        ..add(GetBestSellerEvent())
+        ..add(GetSlidersEvent()),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
