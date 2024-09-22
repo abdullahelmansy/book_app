@@ -1,4 +1,5 @@
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_bloc.dart';
+import 'package:book_app/feature/home/presentation/bloc/bloc/home_event.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_state.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,14 @@ class BannerHomeWidget extends StatefulWidget {
 }
 
 class _BannerHomeWidgetState extends State<BannerHomeWidget> {
+  
   int currentIndex = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<HomeBloc>().add(GetSlidersEvent());
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
@@ -84,7 +92,7 @@ class _BannerHomeWidgetState extends State<BannerHomeWidget> {
                     height: 150,
                     // aspectRatio: 16 / 9,
                     viewportFraction: 0.8,
-                    initialPage: currentIndex,
+                    initialPage: 0,
                     // autoPlay: true,
                     enlargeCenterPage: true,
                     enlargeFactor: 0.3,
@@ -99,7 +107,7 @@ class _BannerHomeWidgetState extends State<BannerHomeWidget> {
                 SmoothPageIndicator(
                     controller: PageController(
                         initialPage: currentIndex), // PageController
-                    count: 4,
+                    count: slider.length,
                     effect: const ExpandingDotsEffect(
                       activeDotColor: AppColors.primaryColor,
                       dotWidth: 7,

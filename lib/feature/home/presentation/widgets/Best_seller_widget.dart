@@ -1,5 +1,6 @@
 import 'package:book_app/core/functions/navigation.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_bloc.dart';
+import 'package:book_app/feature/home/presentation/bloc/bloc/home_event.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_state.dart';
 import 'package:book_app/feature/home/presentation/views/book_details_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,10 +12,22 @@ import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/text_style.dart';
 import '../../../../core/widgets/custom_button.dart';
 
-class PopularBookWidget extends StatelessWidget {
+class PopularBookWidget extends StatefulWidget {
   const PopularBookWidget({
     super.key,
   });
+
+  @override
+  State<PopularBookWidget> createState() => _PopularBookWidgetState();
+}
+
+class _PopularBookWidgetState extends State<PopularBookWidget> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<HomeBloc>().add(GetBestSellerEvent());
+  }
 
   @override
   Widget build(BuildContext context) {

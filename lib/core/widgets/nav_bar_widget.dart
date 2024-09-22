@@ -1,10 +1,10 @@
+import 'package:book_app/feature/home/presentation/views/wishlist/wishlist_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../feature/cart/presentation/views/cart_view.dart';
-import '../../feature/home/presentation/views/home_view.dart';
+import '../../feature/home/presentation/views/home/home_view.dart';
 import '../../feature/profile/presentation/views/profile_view.dart';
-import '../../feature/wishlist/presentation/views/wishlist_view.dart';
 import '../utils/colors.dart';
 
 class NavBarWidget extends StatefulWidget {
@@ -18,8 +18,8 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int currentIndex = 0;
   List<Widget> views = [
     const HomeView(),
+    const WishlistView(),
     const CartView(),
-    const WishListView(),
     const ProfileView()
   ];
   @override
@@ -49,19 +49,19 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/Category.svg'),
+              icon: SvgPicture.asset('assets/icons/Bookmark.svg'),
               label: '',
               activeIcon: SvgPicture.asset(
-                'assets/icons/Category.svg',
+                'assets/icons/Bookmark.svg',
                 colorFilter: const ColorFilter.mode(
                     AppColors.primaryColor, BlendMode.srcIn),
               ),
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/Bookmark.svg'),
+              icon: SvgPicture.asset('assets/icons/Category.svg'),
               label: '',
               activeIcon: SvgPicture.asset(
-                'assets/icons/Bookmark.svg',
+                'assets/icons/Category.svg',
                 colorFilter: const ColorFilter.mode(
                     AppColors.primaryColor, BlendMode.srcIn),
               ),
