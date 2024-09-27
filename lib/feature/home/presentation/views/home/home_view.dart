@@ -1,3 +1,5 @@
+import 'package:book_app/core/functions/navigation.dart';
+import 'package:book_app/feature/search/presentation/view/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -31,7 +33,9 @@ class _HomeViewState extends State<HomeView> {
               icon: SvgPicture.asset('assets/icons/notification.svg'),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                push(context, const SearchView());
+              },
               icon: SvgPicture.asset('assets/icons/search-normal.svg'),
             ),
           ],

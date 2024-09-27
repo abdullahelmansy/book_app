@@ -10,4 +10,5 @@ class ApiEndpoint {
   static String addToWishList = '/add-to-wishlist';
   static String removeFromWishList = '/remove-from-wishlist';
   static String getWishList = '/wishlist';
+  static String getSearch = '/products-search';
 }
