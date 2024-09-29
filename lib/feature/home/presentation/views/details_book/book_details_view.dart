@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../core/utils/text_style.dart';
-import '../../../../core/widgets/custom_button.dart';
+import '../../../../../core/utils/text_style.dart';
+import '../../../../../core/widgets/custom_button.dart';
 
 class BookDetailsView extends StatelessWidget {
   const BookDetailsView({super.key, required this.product});
@@ -38,8 +38,19 @@ class BookDetailsView extends StatelessWidget {
       ),
       body: BlocListener<HomeBloc, HomeState>(
         listener: (context, state) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Added to Wishlist')));
+          if (state is AddToWishListLoadedState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Added to Wishlist'),
+              ),
+            );
+          } else if (state is AddToCartLoadedState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Added to cart'),
+              ),
+            );
+          }
         },
         child: Center(
           child: Padding(
@@ -113,7 +124,11 @@ class BookDetailsView extends StatelessWidget {
                         context,
                         color: AppColors.whiteColor,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        context.read<HomeBloc>().add(
+                              AddToCartEvent(productId: product!.id ?? 0),
+                            );
+                      },
                     ),
                   ],
                 ),

@@ -16,10 +16,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       GetSearchEvent event, Emitter<SearchState> emit) async {
     emit(SearchLoading());
     await SearchRepo.getSearch(name: event.name).then((value) {
-     
-        searchModel = value;
-        emit(SearchLoaded());
-      
+      searchModel = value;
+      emit(SearchLoaded());
     });
   }
 }

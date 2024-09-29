@@ -18,7 +18,6 @@ class BannerHomeWidget extends StatefulWidget {
 }
 
 class _BannerHomeWidgetState extends State<BannerHomeWidget> {
-  
   int currentIndex = 0;
   @override
   void initState() {
@@ -26,6 +25,7 @@ class _BannerHomeWidgetState extends State<BannerHomeWidget> {
     super.initState();
     context.read<HomeBloc>().add(GetSlidersEvent());
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(

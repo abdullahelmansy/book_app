@@ -7,5 +7,4 @@ class GetSearchEvent extends SearchEvent {
   final String name;
 
   GetSearchEvent({required this.name});
-
 }

@@ -1,3 +1,4 @@
+import 'package:book_app/feature/cart/presentation/bloc/checkout_bloc.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_bloc.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_event.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,12 @@ class MainApp extends StatelessWidget {
           create: (context) => AuthBloc(),
         ),
         BlocProvider(
-          create: (context) => HomeBloc()..add(GetBestSellerEvent())..add(GetSlidersEvent()),
+          create: (context) => HomeBloc()
+            ..add(GetBestSellerEvent())
+            ..add(GetSlidersEvent()),
+        ),
+        BlocProvider(
+          create: (context) => CheckoutBloc(),
         ),
       ],
       child: MaterialApp(

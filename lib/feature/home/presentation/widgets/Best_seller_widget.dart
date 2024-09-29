@@ -2,7 +2,7 @@ import 'package:book_app/core/functions/navigation.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_bloc.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_event.dart';
 import 'package:book_app/feature/home/presentation/bloc/bloc/home_state.dart';
-import 'package:book_app/feature/home/presentation/views/book_details_view.dart';
+import 'package:book_app/feature/home/presentation/views/details_book/book_details_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
