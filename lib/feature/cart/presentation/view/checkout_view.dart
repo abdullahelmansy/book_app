@@ -4,7 +4,9 @@ import 'package:book_app/core/utils/text_style.dart';
 import 'package:book_app/core/widgets/custom_button.dart';
 import 'package:book_app/core/widgets/nav_bar_widget.dart';
 import 'package:book_app/feature/cart/data/model/governorates.dart';
+import 'package:book_app/feature/cart/presentation/bloc/checkout_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class CheckoutView extends StatefulWidget {
@@ -26,126 +28,140 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Checkout',
-          style: getTitleTextStyle(context),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20),
-        child: CustomButton(
-          text: 'CheckOut',
-          onTap: () {},
-          textStyle: getTitleTextStyle(
-            context,
-            color: AppColors.primaryColor,
+    return BlocListener<CheckoutBloc, CheckoutState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Checkout',
+            style: getTitleTextStyle(context),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Container(
-                  height: 70,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColors.secondaryColor
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(20),
+          child: CustomButton(
+            text: 'CheckOut',
+            onTap: () {},
+            textStyle: getTitleTextStyle(
+              context,
+              color: AppColors.whiteColor,
+            ),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Container(
+                    height: 70,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.secondaryColor),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Total Price: ${widget.totalPrice} EGP',
+                          style: getTitleTextStyle(context),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Row(
+                  const Gap(20),
+                  const Divider(),
+                  const Gap(20),
+                  Row(
                     children: [
-                      Text('Total Price: ${widget.totalPrice} EGP',style: getTitleTextStyle(context),),
+                      Text(
+                        'Customer Information',
+                        style: getBodyTextStyle(context),
+                      ),
                     ],
                   ),
-                ),
-                const Gap(20),
-                const Divider(),
-                const Gap(20),
-                Row(children: [
-                  Text('Customer Information',style: getBodyTextStyle(context),),
-                ],),
-                const Gap(15),
-                TextFormField(
-                  controller: usernameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Enter your name';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Name',
+                  const Gap(15),
+                  TextFormField(
+                    controller: usernameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your name';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Name',
+                    ),
                   ),
-                ),
-                TextFormField(
-                  controller: emailController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Enter your email';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
+                  TextFormField(
+                    controller: emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your email';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                    ),
                   ),
-                ),
-                TextFormField(
-                  controller: phoneController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Enter your Phone';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Phone',
+                  TextFormField(
+                    controller: phoneController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your Phone';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Phone',
+                    ),
                   ),
-                ),
-                TextFormField(
-                  controller: addressController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Enter your Address';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    hintText: 'Address',
+                  TextFormField(
+                    controller: addressController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your Address';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Address',
+                    ),
                   ),
-                ),
-                Container(
-                  height: 70,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColors.secondaryColor,
-                  ),
-                  child: DropdownButton(
-                      dropdownColor: AppColors.secondaryColor,
-                      isExpanded: true,
-                      value: governorateId,
-                      items: getGovernorate()
-                          .map(
-                            (city) => DropdownMenuItem(
-                              value: city.id,
-                              child: Text(city.name),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          governorateId = value as int;
-                        });
-                      }),
-                )
-              ],
+                  Container(
+                    height: 70,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.secondaryColor,
+                    ),
+                    child: DropdownButton(
+                        dropdownColor: AppColors.secondaryColor,
+                        isExpanded: true,
+                        value: getGovernorate()
+                                .any((city) => city.id == governorateId)
+                            ? governorateId
+                            : null,
+                        items: getGovernorate()
+                            .map(
+                              (city) => DropdownMenuItem(
+                                value: city.id,
+                                child: Text(city.name),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            governorateId = value as int;
+                          });
+                        }),
+                  )
+                ],
+              ),
             ),
           ),
         ),

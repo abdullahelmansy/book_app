@@ -207,26 +207,27 @@ class _CartViewState extends State<CartView> {
                     CustomButton(
                       text: 'Checkout',
                       onTap: () {
-                        if (context
-                                .read<HomeBloc>()
-                                .getCartResponseModel
-                                .data
-                                ?.total ==
-                            context
-                                .read<CheckoutBloc>()
-                                .checkoutResponseModel
-                                .data
-                                ?.total) {
+                        // if (context
+                        //         .read<HomeBloc>()
+                        //         .getCartResponseModel
+                        //         .data
+                        //         ?.total ==
+                        //     context
+                        //         .read<CheckoutBloc>()
+                        //         .checkoutResponseModel
+                        //         .data!
+                        //         .total) {
                           push(
                               context,
                               CheckoutView(
                                   totalPrice: context
-                                      .read<HomeBloc>()
-                                      .getCartResponseModel
-                                      .data
-                                      !.total??'0'));
+                                          .read<HomeBloc>()
+                                          .getCartResponseModel
+                                          .data!
+                                          .total ??
+                                      '0'));
                         }
-                      },
+                      // },
                     ),
                   ],
                 ),

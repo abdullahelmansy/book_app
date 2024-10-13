@@ -23,4 +23,23 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       }
     });
   }
+
+
+  Future<void> getPlaceOrder(
+      AddToPlaceOrderEvent event, Emitter<CheckoutState> emit) async {
+    emit(PlaceOrderLoadingState());
+    await CheckoutRepo.addToPlaceOrder(
+            name: event.name,
+            email: event.email,
+            phone: event.phone,
+            address: event.address,
+            governorateId: event.governorateId.toString())
+        .then((value) {
+      if (value) {
+        emit(PlaceOrderLoadedState());
+      } else {
+        emit(ErrorState('Get Slider Failed') as CheckoutState);
+      }
+    });
+  }
 }

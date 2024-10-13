@@ -37,7 +37,7 @@ class Governorates {
   factory Governorates.fromJson(Map<String, dynamic> json) {
     return Governorates(
       id: json['id'],
-      name: json['name'],
+      name: json['governorate_name_en'],
     );
   }
 }

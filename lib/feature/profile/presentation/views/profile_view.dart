@@ -1,4 +1,9 @@
+import 'package:book_app/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:book_app/feature/auth/presentation/bloc/auth_event.dart';
+import 'package:book_app/feature/auth/presentation/bloc/auth_state.dart';
+import 'package:book_app/feature/info/welcome_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/functions/navigation.dart';
@@ -24,9 +29,21 @@ class _ProfileViewState extends State<ProfileView> {
           style: getTitleTextStyle(context),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/logout.svg'),
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is LogoutSuccessState) {
+                pushAndRemoveUntil(context, const WelcomeView());
+              } else if (state is ErrorState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Email not found')));
+              }
+            },
+            child: IconButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(LogoutEvent());
+              },
+              icon: SvgPicture.asset('assets/icons/logout.svg'),
+            ),
           ),
         ],
       ),

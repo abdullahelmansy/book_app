@@ -44,11 +44,7 @@ class OPTView extends StatelessWidget {
             const Gap(32),
             const PinputWidegt(),
             const Gap(38),
-            CustomButton(
-                text: 'Verify',
-                onTap: () {
-                  push(context, const NewPasswordView());
-                }),
+            
           ],
         ),
       ),
